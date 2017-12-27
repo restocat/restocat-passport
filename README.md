@@ -3,7 +3,7 @@
 ## Installation
 
 
-`npm i passport restocat-passport`
+`npm i restocat-passport`
 
 
 ## How to use
@@ -18,7 +18,6 @@
     const BearerStrategy = require('passport-http-bearer').Strategy;
 
     passport.serializeUser((user, done) => done(null, user.id));
-
     passport.deserializeUser((id, done) => mongoose.model('User').findById(id, done));
 
     passport.use(new LocalStrategy({passReqToCallback: true}, /* handler */));
@@ -26,8 +25,8 @@
     passport.use(new BearerStrategy(/* handler */));
     passport.use(new ClientPasswordStrategy({passReqToCallback: true}, /* handler */));
 
-    const clientAuth = passport.authenticate(['basic', 'oauth2-client-password'], {session: false, failWithError: true});
-    const userAuth = passport.authenticate('bearer', {session: false, failWithError: true});
+    const clientAuth = passport.authenticate(['basic', 'oauth2-client-password'], {failWithError: true});
+    const userAuth = passport.authenticate('bearer', {failWithError: true});
 
     // and somewhere
 
